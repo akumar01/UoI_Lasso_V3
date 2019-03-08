@@ -1,4 +1,4 @@
-TARGETS=uoi_var
+TARGETS=uoi
 OBJS = distribute-data.o lasso.o bins.o manage-data.o CommandLineOptions.o
 
 
