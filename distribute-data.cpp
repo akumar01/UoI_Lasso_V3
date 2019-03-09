@@ -156,7 +156,8 @@ MatrixXf CreateSupport(int n_lambdas, int n_bootstraps, int threshold_, MatrixXf
     {
       for (int feature_idx = 0; feature_idx < n_features; feature_idx++)
       {
-       if (estimates(((n_lambdas*bootstraps)+lambda_idx), feature_idx) != 0)
+       //if (estimates(((n_lambdas*bootstraps)+lambda_idx), feature_idx) != 0)
+       if(estimates((lambda_idx*n_bootstraps)+bootstraps, feature_idx) != 0)
           tmp(bootstraps, feature_idx) = 1.0;
         else
           tmp(bootstraps, feature_idx) = 0.0;
