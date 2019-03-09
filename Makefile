@@ -18,7 +18,7 @@ BOOSTFLAGS =  -L${BOOST_ROOT}/lib/
 
 all: $(TARGETS)
 
-uoi_var : $(OBJS)
+uoi : $(OBJS)
 	$(CXX)  -o $@ $(OBJS)  $(CXXFLAGS) $(ADD_FLAGS) $(BOOSTFLAGS) -lhdf5 -lboost_program_options -lboost_filesystem -lboost_system -lgsl
 
 %.o : %.cpp
