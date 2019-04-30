@@ -15,16 +15,19 @@ module load sde
 
 exe=./uoi
 input=/global/cscratch1/sd/akumar25/hcp/rfMRI_zscored.h5
-#nbootS=5
-#nbootE=5
-#output=./Final_Run/coupling/output.h5
-#output1=./Final_Run/coupling/lasso.h5
-#nMP=8
-ngroups=1
-#nboot=5
+cfile=/global/cscratch1/sd/akumar25/hcp/
+sfile=/global/cscratch1/sd/akumar25/hcp/
 
+ngroups=1
+n_lambdas=48
+selection_thres_frac=1
+train_frac_sel=0.9
+train_frac_est=0.9
+n_boots_sel=48
+n_boots_est=48
+bagging_options=1
 
 OMP_NUM_THREADS=4
 OMP_PROC_BIND=spread
 
-srun -n 68 -c 4 --cpu_bind=threads -u $exe -f $input -v 1 -d 1 --output_coef ./coef_.h5 --output_scores ./scores_.h5 -n $ngroups --dataset_matrix /X/data --dataset_vector /y/data
+srun -n 68 -c 4 --cpu_bind=threads -u $exe -f $input -v 1 -d 1 --output_coef $cfile --output_scores $sfile -n $ngroups --dataset_matrix /X/data --dataset_vector /y/data --train_frac_sel train_frac_sel --train_frac_est train_frac_est --n_boots_est n_boots_est --n_boots_sel n_boots_sel --bagging_options bagging_options
