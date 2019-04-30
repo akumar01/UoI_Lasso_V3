@@ -1,6 +1,6 @@
 #!/bin/bash
 #SBATCH -N 1
-#SBATCH -n 2
+#SBATCH -n 68
 #SBATCH -C knl,quad,cache
 #SBATCH --job-name=UoI_Debug
 #SBATCH --output=./debug/1/stdout.log
@@ -13,9 +13,8 @@ module load eigen3
 module load cray-hdf5-parallel
 module load sde
 
-#nrnd=1
 exe=./uoi
-input=/global/cscratch1/sd/mbalasu2/test/coupling.h5
+input=/global/cscratch1/sd/akumar25/hcp/rfMRI_zscored.h5
 #nbootS=5
 #nbootE=5
 #output=./Final_Run/coupling/output.h5
@@ -28,5 +27,4 @@ ngroups=1
 OMP_NUM_THREADS=4
 OMP_PROC_BIND=spread
 
-
-srun -n 2 -c 4 --cpu_bind=threads -u $exe -f $input -v 1 -d 1 --output_coef ./coef_.h5 --output_scores ./scores_.h5 -n $ngroups --dataset_matrix /X/data --dataset_vector /y/data
+srun -n 68 -c 4 --cpu_bind=threads -u $exe -f $input -v 1 -d 1 --output_coef ./coef_.h5 --output_scores ./scores_.h5 -n $ngroups --dataset_matrix /X/data --dataset_vector /y/data
